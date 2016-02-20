@@ -1,5 +1,8 @@
 <?php
 App::uses('AppController', 'Controller');
+
+session_start();
+
 /**
  * Patients Controller
  *
@@ -8,6 +11,8 @@ App::uses('AppController', 'Controller');
  */
 class PatientsController extends AppController {
 
+
+var $uses = array('Patient','Invoice','Ptest','Sample');
 /**
  * Components
  *
@@ -49,8 +54,10 @@ class PatientsController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Patient->create();
 			if ($this->Patient->save($this->request->data)) {
-				$this->Flash->success(__('The patient has been saved.'));
-				return $this->redirect(array('action' => 'index'));
+
+				$_SESSION['add_ptest_to_user']=$this->Patient->id;
+				$this->Flash->success(__('The patient: '.$this->Patient->name.' has been saved.'));
+				return $this->redirect(array('controller' => 'ptests','action' => 'add'));
 			} else {
 				$this->Flash->error(__('The patient could not be saved. Please, try again.'));
 			}

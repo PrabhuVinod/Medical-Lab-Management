@@ -1,5 +1,6 @@
 <?php
 App::uses('AppController', 'Controller');
+session_start();
 /**
  * Ptests Controller
  *
@@ -7,6 +8,7 @@ App::uses('AppController', 'Controller');
  * @property PaginatorComponent $Paginator
  */
 class PtestsController extends AppController {
+var $uses = array('Patient','Test','Ptest');
 
 /**
  * Components
@@ -57,6 +59,7 @@ class PtestsController extends AppController {
 		}
 	}
 
+
 /**
  * edit method
  *
@@ -101,4 +104,69 @@ class PtestsController extends AppController {
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
+
+
+
+
+
+
+
+
+
+
+	public function add_norefresh() {
+
+		$this->autoRender=false;
+		$this->layout=false;
+
+		if ($this->request->is('post')) {
+
+			$this->request->data['Ptest']['pid']=$_SESSION['add_ptest_to_user'];
+			$tid=$this->Test->find('first',array('conditions'=>array('Test.name' =>$this->request->data['tname'])));
+
+
+			$this->request->data['Ptest']['tid']=$tid['Test']['id'];
+
+			$this->Ptest->create();
+
+			if ($this->Ptest->save($this->request->data)) {
+				// $this->Flash->success(__('The ptest has been saved.'));
+				// return $this->redirect(array('action' => 'index'));
+			} else {
+				$this->Flash->error(__('The Patient test could not be saved. Please, try again.'));
+			}
+		}
+	}
+
+
+
+
+	public function remove_norefresh() {
+
+
+		$this->autoRender=false;
+		$this->layout=false;
+
+		if ($this->request->is('post')) {
+
+			$this->request->data['Ptest']['pid']=$_SESSION['add_ptest_to_user'];
+			$tid=$this->Test->find('first',array('conditions'=>array('Test.name' =>$this->request->data['tname'])));
+
+			$this->request->data['Ptest']['tid']=$tid['Test']['id'];
+			
+
+			$sql="DELETE FROM ptests WHERE pid = ".$this->request->data['Ptest']['pid']." AND tid=".$this->request->data['Ptest']['tid'].";";
+
+			$this->Ptest->query($sql);
+
+	
+
+
+	}
+
+	}
+
+
+
+
 }

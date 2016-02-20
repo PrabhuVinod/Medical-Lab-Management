@@ -101,4 +101,25 @@ class TestsController extends AppController {
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
+
+
+
+
+
+
+
+	public function get_list(){
+
+		$this->layout=false;
+		$this->autoRender=false;
+
+		$list = $this->Test->find('all', array(
+        'fields' => array('Test.id','Test.name'),
+        'order' => array('Test.id ASC')
+    ));
+
+	
+	echo json_encode($list);
+
+	}
 }

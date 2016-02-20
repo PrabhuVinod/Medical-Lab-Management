@@ -1,0 +1,19 @@
+#PatientTestdateYear{
+	margin-right: 47px !important;
+}
+.datetime{
+	font-size: 21px !important;
+}
+#PatientResultdateYear{
+	margin-right: 47px !important;
+}
+label{
+	width: 200px !important;
+}
+.add_ptest,.delete_ptest{
+	cursor: pointer;
+}
+.saved_ptest{
+	padding-top: 5px;
+}
+

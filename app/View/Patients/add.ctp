@@ -22,4 +22,7 @@
 
 		<li><?php echo $this->Html->link(__('List Patients'), array('action' => 'index')); ?></li>
 	</ul>
+
 </div>
+
+
