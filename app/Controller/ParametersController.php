@@ -1,5 +1,7 @@
 <?php
 App::uses('AppController', 'Controller');
+session_start();
+
 /**
  * Parameters Controller
  *
@@ -101,4 +103,48 @@ class ParametersController extends AppController {
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
+
+
+
+
+public function add_no_refresh(){
+
+	$this->autoRender=false;
+		$this->layout=false;
+
+	if ($this->request->is('post')) {
+		$this->request->data['Parameter']['tid']=$_SESSION['add_param_to_test'];
+		$this->request->data['Parameter']['name']=$this->request->data['paramname'];
+		$this->request->data['Parameter']['defaultval']=$this->request->data['paramvalue'];
+		$this->request->data['Parameter']['unit']=$this->request->data['paramunit'];
+	
+			$this->Parameter->create();
+			if ($this->Parameter->save($this->request->data)) {
+				echo $this->Parameter->id;
+
+
+				// $this->Flash->success(__('The parameter has been saved.'));
+				// return $this->redirect(array('action' => 'index'));
+			} else {
+				// $this->Flash->error(__('The parameter could not be saved. Please, try again.'));
+			}
+		}
+}
+
+
+public function del_no_refresh(){
+
+	$this->autoRender=false;
+		$this->layout=false;
+
+	if ($this->request->is('post')) {
+
+			$sql="DELETE FROM parameters WHERE id = ".$this->request->data['paramid'].";";
+
+			$this->Parameter->query($sql);
+
+		}
+}
+
+
 }

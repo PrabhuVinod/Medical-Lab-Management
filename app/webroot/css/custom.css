@@ -16,4 +16,12 @@ label{
 .saved_ptest{
 	padding-top: 5px;
 }
-
+.params_div .form-control{
+	margin: 5px !important;
+	width: 700px !important;
+}
+.param-controls button{
+	width: 735px !important;
+	height: 50px;
+	background: #dbabab;
+}

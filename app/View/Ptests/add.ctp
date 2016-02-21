@@ -47,8 +47,8 @@
 
 <?php
 
-echo "dfgdfg";
-echo $_SESSION['add_ptest_to_user'];
+// echo "dfgdfg";
+// echo $_SESSION['add_ptest_to_user'];
 ?>
 
 

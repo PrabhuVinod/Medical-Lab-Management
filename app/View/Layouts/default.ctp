@@ -33,10 +33,10 @@ $cakeDescription = __d('cake_dev', 'UmaLab: the medical lab software');
 		echo $this->Html->css("jquery-ui.css");
 		echo $this->Html->script("jquery.js");
 		echo $this->Html->script("jquery-ui.js");
-		echo $this->Html->script("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js");
+		echo $this->Html->script("bootstrap.min.js");
 
-		echo $this->Html->css('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css');
-		echo $this->Html->css('https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css');
+		echo $this->Html->css('bootstrap.min.css');
+		echo $this->Html->css('font-awesome.min.css');
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');

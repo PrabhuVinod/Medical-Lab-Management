@@ -1,5 +1,7 @@
 <?php
 App::uses('AppController', 'Controller');
+session_start();
+
 /**
  * Tests Controller
  *
@@ -49,8 +51,10 @@ class TestsController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Test->create();
 			if ($this->Test->save($this->request->data)) {
+
+				$_SESSION['add_param_to_test']=$this->Test->id;
 				$this->Flash->success(__('The test has been saved.'));
-				return $this->redirect(array('action' => 'index'));
+				return $this->redirect(array('controller' => 'parameters','action' => 'add'));
 			} else {
 				$this->Flash->error(__('The test could not be saved. Please, try again.'));
 			}
