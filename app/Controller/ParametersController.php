@@ -24,6 +24,9 @@ class ParametersController extends AppController {
  */
 	public function index() {
 		$this->Parameter->recursive = 0;
+		$this->Paginator->settings = array(
+        'conditions' => array('Parameter.id =' => $_SESSION['add_param_to_test'])
+    	);
 		$this->set('parameters', $this->Paginator->paginate());
 	}
 

@@ -26,7 +26,7 @@
 </div>
 
 <small><br><br>Click ' + ' button to ADD a test.<br></small>
-<small>Click ' + ' button to ADD a test.<br><br></small>
+<small>Click ' - ' button to DELETE a test.<br><br></small>
 <small><strong>Note: </strong>These tests are saved instantly, when you click on ' <strong>+</strong> '.</small>
 
 
@@ -39,7 +39,11 @@
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
 
-		<li><?php echo $this->Html->link(__('List Ptests'), array('action' => 'index')); ?></li>
+		<li><?php echo $this->Html->link(__('List this patient tests'), array('action' => 'index')); ?></li>
+	</ul>
+	<ul>
+
+		<li><?php echo $this->Html->link(__('View invoice'), array('controller' => 'invoices','action' => 'view',$_SESSION['new_invoice_id'])); ?></li>
 	</ul>
 </div>
 

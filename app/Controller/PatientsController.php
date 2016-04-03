@@ -56,6 +56,25 @@ var $uses = array('Patient','Invoice','Ptest','Sample');
 			if ($this->Patient->save($this->request->data)) {
 
 				$_SESSION['add_ptest_to_user']=$this->Patient->id;
+
+
+				$invoicedata=Array();
+
+				
+				$this->Invoice->create();
+				$invoicedata['Invoice']['pid']=$_SESSION['add_ptest_to_user'];
+				$invoicedata['Invoice']['amount']=$this->request->data['Patient']['advance'];
+				$invoicedata['Invoice']['advance']=$this->request->data['Patient']['advance'];
+				$invoicedata['Invoice']['totalamount']=$this->request->data['Patient']['advance'];
+				$invoicedata['Invoice']['balance']=0;
+				$invoicedata['Invoice']['discount']=0;
+
+				$this->Invoice->save($invoicedata);
+				$_SESSION['new_invoice_id']=$this->Invoice->id;
+
+	
+
+
 				$this->Flash->success(__('The patient: '.$this->Patient->name.' has been saved.'));
 				return $this->redirect(array('controller' => 'ptests','action' => 'add'));
 			} else {

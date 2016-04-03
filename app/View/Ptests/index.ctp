@@ -8,22 +8,21 @@
 			<th><?php echo $this->Paginator->sort('tid'); ?></th>
 			<th><?php echo $this->Paginator->sort('created'); ?></th>
 			<th><?php echo $this->Paginator->sort('modified'); ?></th>
-			<th class="actions"><?php echo __('Actions'); ?></th>
+			<!-- <th class="actions"><?php echo __('Actions'); ?></th> -->
 	</tr>
 	</thead>
 	<tbody>
 	<?php foreach ($ptests as $ptest): ?>
 	<tr>
-		<td><?php echo h($ptest['Ptest']['id']); ?>&nbsp;</td>
 		<td><?php echo h($ptest['Ptest']['pid']); ?>&nbsp;</td>
 		<td><?php echo h($ptest['Ptest']['tid']); ?>&nbsp;</td>
 		<td><?php echo h($ptest['Ptest']['created']); ?>&nbsp;</td>
 		<td><?php echo h($ptest['Ptest']['modified']); ?>&nbsp;</td>
-		<td class="actions">
+		<!-- <td class="actions">
 			<?php echo $this->Html->link(__('View'), array('action' => 'view', $ptest['Ptest']['id'])); ?>
 			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $ptest['Ptest']['id'])); ?>
 			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $ptest['Ptest']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $ptest['Ptest']['id']))); ?>
-		</td>
+		</td> -->
 	</tr>
 <?php endforeach; ?>
 	</tbody>

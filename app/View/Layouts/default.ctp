@@ -45,8 +45,14 @@ $cakeDescription = __d('cake_dev', 'UmaLab: the medical lab software');
 </head>
 <body>
 	<div id="container">
+
+	<?php
+echo "<pre>";
+print_r($_SESSION);
+echo "</pre>";
+?>
 		<div id="header">
-			<h1><?php echo $this->Html->link($cakeDescription, '#'); ?></h1>
+			<h1><?php echo $this->Html->link($cakeDescription, '/'); ?></h1>
 		</div>
 		<div id="content">
 

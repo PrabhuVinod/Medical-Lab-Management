@@ -1,5 +1,6 @@
 <?php
 App::uses('AppController', 'Controller');
+session_start();
 /**
  * Invoices Controller
  *
@@ -14,6 +15,7 @@ class InvoicesController extends AppController {
  * @var array
  */
 	public $components = array('Paginator');
+	var $uses = array('Ptest','Test','Patient','Invoice');
 
 /**
  * index method
@@ -37,7 +39,24 @@ class InvoicesController extends AppController {
 			throw new NotFoundException(__('Invalid invoice'));
 		}
 		$options = array('conditions' => array('Invoice.' . $this->Invoice->primaryKey => $id));
-		$this->set('invoice', $this->Invoice->find('first', $options));
+
+		$invoice_data=$this->Invoice->find('first', $options);
+
+		$invoice_data['ptests']=$this->Ptest->find('all', array('conditions' => array('pid' => $_SESSION['add_ptest_to_user'])));
+
+
+		foreach ($invoice_data['ptests'] as $key => $value) {
+			
+			$invoice_data['tests'][$value['Ptest']['tid']]=$this->Test->find('first', array('conditions' => array('id' => $value['Ptest']['tid'])));
+
+		}
+		$invoice_data['patient']=$this->Patient->find('first', array('conditions' => array('id' => $value['Ptest']['pid'])));
+
+		echo "<pre>";
+		print_r($invoice_data);
+		echo "</pre>";
+
+		$this->set('invoice', $invoice_data);
 	}
 
 /**

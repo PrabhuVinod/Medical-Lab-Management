@@ -8,7 +8,7 @@ session_start();
  * @property PaginatorComponent $Paginator
  */
 class PtestsController extends AppController {
-var $uses = array('Patient','Test','Ptest');
+var $uses = array('Ptest','Test','Invoice');
 
 /**
  * Components
@@ -24,6 +24,9 @@ var $uses = array('Patient','Test','Ptest');
  */
 	public function index() {
 		$this->Ptest->recursive = 0;
+		$this->Paginator->settings = array(
+        'conditions' => array('Ptest.pid =' => $_SESSION['add_ptest_to_user'])
+    	);
 		$this->set('ptests', $this->Paginator->paginate());
 	}
 
@@ -130,6 +133,29 @@ var $uses = array('Patient','Test','Ptest');
 			$this->Ptest->create();
 
 			if ($this->Ptest->save($this->request->data)) {
+
+
+				$this->Invoice->id=$_SESSION['new_invoice_id'];
+
+				$invoice_data=$this->Invoice->find('first',array('conditions'=>array('id' =>$this->Invoice->id)));
+
+				$new_invoice['Invoice']['totalamount']=$invoice_data['Invoice']['totalamount'] + $tid['Test']['cost'];
+
+				if ($invoice_data['Invoice']['discount']>0) {
+					
+					$new_invoice['Invoice']['amount']=$new_invoice['Invoice']['totalamount']-(($new_invoice['Invoice']['totalamount'])/$invoice_data['Invoice']['discount']);
+				}
+				else{
+					$new_invoice['Invoice']['amount']=$new_invoice['Invoice']['totalamount'];
+				}
+
+				$new_invoice['Invoice']['balance']=$new_invoice['Invoice']['amount'] - $invoice_data['Invoice']['advance'];
+
+				$this->Invoice->save($new_invoice);
+
+
+
+
 				// $this->Flash->success(__('The ptest has been saved.'));
 				// return $this->redirect(array('action' => 'index'));
 			} else {
